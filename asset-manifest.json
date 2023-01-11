@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bcv_calculator/static/css/main.ba0e3084.css",
+    "main.js": "/bcv_calculator/static/js/main.405e86ca.js",
+    "static/js/787.01367fb8.chunk.js": "/bcv_calculator/static/js/787.01367fb8.chunk.js",
+    "index.html": "/bcv_calculator/index.html",
+    "main.ba0e3084.css.map": "/bcv_calculator/static/css/main.ba0e3084.css.map",
+    "main.405e86ca.js.map": "/bcv_calculator/static/js/main.405e86ca.js.map",
+    "787.01367fb8.chunk.js.map": "/bcv_calculator/static/js/787.01367fb8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba0e3084.css",
+    "static/js/main.405e86ca.js"
+  ]
+}
