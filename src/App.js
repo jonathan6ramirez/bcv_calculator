@@ -82,7 +82,7 @@ function App() {
     const handleEbaySubmit = (e) => {}
 
     return (
-        <main className="h-screen dark:bg-slate-900 dark:text-slate-300 p-5">
+        <main className=" dark:bg-slate-900 dark:text-slate-300 p-5">
             <nav className="w-full m-auto text-center p-5 mb-10">
                 <h1 className="text-2xl md:text-3xl">
                     BCV & Highest Target Price Calculator
@@ -173,7 +173,7 @@ function App() {
                     <span>${highesTargetPrice}</span>
                 </div>
             </div>
-            <br></br>
+
             <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">
                 <h2 className="text-2xl md:text-3xl text-center">
                     Ebay Price Calculator
