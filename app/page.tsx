@@ -3,24 +3,35 @@ import React, { useState } from "react";
 //import { Form } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 //import Image from "next/image";
+//
+interface InitialState {
+  msrp: string | number,
+  lowestComp: string | number,
+  discount: string | number,
+}
 
-function calculateBCV(price, lowestComp, discount) {
+interface BCVCalculated {
+  bcv: number,
+  highestTargetPrice: number
+}
+
+function calculateBCV(price: number, lowestComp: number, discount: number): BCVCalculated {
   if (lowestComp < 2000) {
     return { bcv: 0, highestTargetPrice: 0 }
   }
-  let bcv = Math.round(price * (1 - discount / 100))
-  let highestTargetPrice
+  let bcv: number = Math.round(price * (1 - discount / 100));
+  let highestTargetPrice: number;
   if (lowestComp - 2000 <= bcv) {
-    highestTargetPrice = Math.round(lowestComp * (80 / 100))
+    highestTargetPrice = Math.round(lowestComp * (80 / 100));
   } else {
-    highestTargetPrice = Math.round(lowestComp - 2000)
+    highestTargetPrice = Math.round(lowestComp - 2000);
   }
-  return { bcv, highestTargetPrice }
+  return { bcv, highestTargetPrice };
 }
 
-function calculateCost(salePrice) {
-  let cost = 0
-  let itemFee = 0
+function calculateCost(salePrice: number): string {
+  let cost: number = 0
+  let itemFee: number = 0
 
   if (salePrice <= 1000) {
     itemFee = salePrice * 0.15
@@ -36,54 +47,57 @@ function calculateCost(salePrice) {
 }
 
 export default function Home() {
-  const initialState = { msrp: 0, lowestComp: 0, discount: 0 }
-  const [form, setForm] = useState({ ...initialState })
-  const [BCV, setBCV] = useState(0)
-  const [highesTargetPrice, setHighesTargetPrice] = useState(0)
+  const initialState: InitialState = { msrp: "0", lowestComp: "0", discount: "0" }
+  const [form, setForm] = useState<InitialState>({ ...initialState })
+  const [BCV, setBCV] = useState<number>(0)
+  const [highesTargetPrice, setHighesTargetPrice] = useState<number>(0)
 
-  const [ebayPrice, setEbayPrice] = useState(0)
-  const [finalEbayPrice, setFinalEbayPrice] = useState(0)
+  const [ebayPrice, setEbayPrice] = useState<string | number>("0")
+  const [finalEbayPrice, setFinalEbayPrice] = useState<string | number>("0")
 
   //* INFO: Helper Functions
-  const addCommas = (num) =>
+  const addCommas = (num: string): string =>
     num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, '')
+  const removeNonNumeric = (num: string): string => num.toString().replace(/[^0-9]/g, '')
 
-  const handleReset = () => {
+  const handleReset = (): void => {
     setForm({ ...initialState })
     setBCV(0)
     setHighesTargetPrice(0)
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: any): void => {
     setForm({
       ...form,
       [e.target.name]: addCommas(removeNonNumeric(e.target.value)),
     })
   }
 
-  const handleEbayChange = (e) => {
+  const handleEbayChange = (e: any): void => {
     const res = calculateCost(e.target.value.split(',').join(''))
     setEbayPrice(addCommas(removeNonNumeric(e.target.value)))
-    const finalPrice = e.target.value.split(',').join('') - res
+    const finalPrice = e.target.value.split(',').join('') - res;
     setFinalEbayPrice(finalPrice.toFixed(2))
     // console.log(finalPrice.toFixed(2), 'this is the final price')
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any): void => {
     e.preventDefault()
+    let msrp = form.msrp.split(",").join("");
+    let lowestComp = form.lowestComp.split(",").join("");
+    let discount = form.discount.split(",").join("");
     let result = calculateBCV(
-      form.msrp.split(',').join(''),
-      form.lowestComp.split(',').join(''),
-      form.discount.split(',').join('')
+      msrp,
+      lowestComp,
+      discount
     )
     console.log(result, 'this is the result from the bcv calculation')
     setBCV(result.bcv)
     setHighesTargetPrice(result.highestTargetPrice)
   }
 
-  const handleEbaySubmit = (e) => { }
+  //const handleEbaySubmit = (e) => { }
   return (
     <main className=" dark:bg-slate-900 dark:text-slate-300 p-5">
       <nav className="w-full m-auto text-center p-5 mb-10">

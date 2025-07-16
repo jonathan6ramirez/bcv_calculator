@@ -1,9 +1,11 @@
 {
   "name": "bcv_calculator",
+  "homepage": "https://jonathan6ramirez.github.io/bcv_calculator/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "deploy": "npm run build && npm run export && npx gh-pages -d out",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
