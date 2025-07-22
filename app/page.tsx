@@ -1,9 +1,7 @@
 "use client"
 import React, { useState } from "react";
-//import { Form } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-//import Image from "next/image";
-//
+
 interface InitialState {
   msrp: string | number,
   lowestComp: string | number,
@@ -29,7 +27,7 @@ function calculateBCV(price: number, lowestComp: number, discount: number): BCVC
   return { bcv, highestTargetPrice };
 }
 
-function calculateCost(salePrice: number): string {
+function calculateCost(salePrice: number): number {
   let cost: number = 0
   let itemFee: number = 0
 
@@ -43,7 +41,7 @@ function calculateCost(salePrice: number): string {
 
   cost = itemFee + 0.3
 
-  return cost.toFixed(2)
+  return parseFloat(cost.toFixed(2))
 }
 
 export default function Home() {
@@ -77,21 +75,26 @@ export default function Home() {
   const handleEbayChange = (e: any): void => {
     const res = calculateCost(e.target.value.split(',').join(''))
     setEbayPrice(addCommas(removeNonNumeric(e.target.value)))
-    const finalPrice = e.target.value.split(',').join('') - res;
+
+    const finalPrice = parseFloat(e.target.value.split(',').join('')) - res;
     setFinalEbayPrice(finalPrice.toFixed(2))
     // console.log(finalPrice.toFixed(2), 'this is the final price')
   }
 
   const handleSubmit = (e: any): void => {
+    // This is supposed to prevent the reloading of the page on submission
     e.preventDefault()
-    let msrp = form.msrp.split(",").join("");
-    let lowestComp = form.lowestComp.split(",").join("");
-    let discount = form.discount.split(",").join("");
+
+    let msrp = String(form.msrp).split(",").join("");
+    let lowestComp = String(form.lowestComp).split(",").join("");
+    let discount = String(form.discount).split(",").join("");
+
     let result = calculateBCV(
-      msrp,
-      lowestComp,
-      discount
+      parseInt(msrp),
+      parseInt(lowestComp),
+      parseInt(discount)
     )
+
     console.log(result, 'this is the result from the bcv calculation')
     setBCV(result.bcv)
     setHighesTargetPrice(result.highestTargetPrice)
