@@ -2,47 +2,11 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
-interface InitialState {
-  msrp: string | number,
-  lowestComp: string | number,
-  discount: string | number,
-}
+// Types
+import { InitialState } from "./types";
 
-interface BCVCalculated {
-  bcv: number,
-  highestTargetPrice: number
-}
-
-function calculateBCV(price: number, lowestComp: number, discount: number): BCVCalculated {
-  if (lowestComp < 2000) {
-    return { bcv: 0, highestTargetPrice: 0 }
-  }
-  let bcv: number = Math.round(price * (1 - discount / 100));
-  let highestTargetPrice: number;
-  if (lowestComp - 2000 <= bcv) {
-    highestTargetPrice = Math.round(lowestComp * (80 / 100));
-  } else {
-    highestTargetPrice = Math.round(lowestComp - 2000);
-  }
-  return { bcv, highestTargetPrice };
-}
-
-function calculateCost(salePrice: number): number {
-  let cost: number = 0
-  let itemFee: number = 0
-
-  if (salePrice <= 1000) {
-    itemFee = salePrice * 0.15
-  } else if (salePrice > 1000 && salePrice <= 7500) {
-    itemFee = 1000 * 0.15 + (salePrice - 1000) * 0.065
-  } else {
-    itemFee = 1000 * 0.15 + 6500 * 0.065 + (salePrice - 7500) * 0.03
-  }
-
-  cost = itemFee + 0.3
-
-  return parseFloat(cost.toFixed(2))
-}
+// Util Functions
+import { calculateBCV, calculateCost, addCommas, removeNonNumeric } from "./util";
 
 export default function Home() {
   const initialState: InitialState = { msrp: "0", lowestComp: "0", discount: "0" }
@@ -53,11 +17,6 @@ export default function Home() {
   const [ebayPrice, setEbayPrice] = useState<string | number>("0")
   const [finalEbayPrice, setFinalEbayPrice] = useState<string | number>("0")
 
-  //* INFO: Helper Functions
-  const addCommas = (num: string): string =>
-    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-  const removeNonNumeric = (num: string): string => num.toString().replace(/[^0-9]/g, '')
 
   const handleReset = (): void => {
     setForm({ ...initialState })
