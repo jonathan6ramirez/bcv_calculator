@@ -14,6 +14,12 @@ export interface MarkersType {
   msrp: number,
 }
 
+export interface CalculatedMarkers {
+  bcv: number | string,
+  fiftyPercent: number | string,
+  seventyFivePercent: number | string,
+}
+
 export interface MarkersDataType {
   msrp: number,
   bcv: number,

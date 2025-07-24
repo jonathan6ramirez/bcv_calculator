@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import Form from "react-bootstrap/Form";
 
 // Types
-import { MarkersType, MarkersDataType } from '../types';
+import { MarkersType, MarkersDataType, CalculatedMarkers } from '../types';
 
 // Components
 import FirstMarkerGraph from './calculatemarkers/FirstMarkerGraph';
@@ -21,13 +21,17 @@ import { calculateMarkers, addCommas, removeNonNumeric } from '../util';
 // on the dollar it is. ex. $10000 msrp and its 30 cents on the dollar.
 // 10000 * .3 = $3000
 
-
 export default function CalculateMarkers() {
   const initialState: MarkersType = { msrp: 0, cents: "" }
   const [form, setForm] = useState<MarkersType>({ ...initialState })
   const [data, setData] = useState<MarkersDataType[]>([
     { name: 'Markers', msrp: 0, bcv: 0, fifty: 0, seventyFive: 0 },
   ]);
+  const [markers, setMarkers] = useState<CalculatedMarkers>({
+    bcv: "",
+    fiftyPercent: "",
+    seventyFivePercent: "",
+  });
 
   const handleReset = (): void => {
     setData([
@@ -62,15 +66,29 @@ export default function CalculateMarkers() {
       parseInt(msrp)
     );
 
+    let bcv = result.bcv;
+    let fifty = result.bcv + result.fifty;
+    let seventyFive = result.seventyFive + fifty;
+
     console.log(result, 'this is the result from the marker calculation');
     //setBCV(result.bcv)
     //setHighesTargetPrice(result.highestTargetPrice)
     setData([result])
+    setMarkers({
+      bcv: bcv,
+      fiftyPercent: fifty,
+      seventyFivePercent: seventyFive
+    })
   }
 
   return (
     <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
       dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-4">
+      <div className="w-full text-center p-5 mb-4">
+        <h1 className="text-2xl md:text-3xl">
+          Calculate BCV, 50%, 75%
+        </h1>
+      </div>
       {/* Form */}
       <div className="flex justify-center">
         <Form onSubmit={handleSubmit}>
@@ -143,6 +161,22 @@ export default function CalculateMarkers() {
             </button>
           </div>
         </Form>
+      </div>
+
+      {/* BCV, 50%, 75% */}
+      <div className="grid gap-4 px-10 text-2xl">
+        <div className="flex justify-between">
+          <Form.Label className="mx-3 text">BCV:</Form.Label>
+          <span>${markers.bcv}</span>
+        </div>
+        <div className="flex justify-between">
+          <Form.Label className="mx-3">50%:</Form.Label>
+          <span>${markers.fiftyPercent}</span>
+        </div>
+        <div className="flex justify-between">
+          <Form.Label className="mx-3">75%:</Form.Label>
+          <span>${markers.seventyFivePercent}</span>
+        </div>
       </div>
 
       {/* First Graph */}
