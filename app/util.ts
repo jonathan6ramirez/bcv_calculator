@@ -1,4 +1,4 @@
-import { BCVCalculated } from "./types";
+import { BCVCalculated, MarkersType } from "./types";
 
 export function calculateBCV(price: number, lowestComp: number, discount: number): BCVCalculated {
   if (lowestComp < 2000) {
@@ -33,6 +33,24 @@ export function calculateCost(salePrice: number): number {
 
   return parseFloat(cost.toFixed(2));
 };
+
+export function calculateMarkers(cents: number, msrp: number) {
+  var bottom, middle, seventyFive, remaining;
+
+  bottom = msrp * cents;
+  middle = (msrp * .5) - bottom;
+  console.log(middle, 'this is the middle');
+  seventyFive = (msrp * .75) - (middle + bottom);
+  remaining = msrp - (msrp * .75);
+
+  return {
+    bcv: bottom,
+    fifty: middle,
+    seventyFive: seventyFive,
+    msrp: remaining,
+    name: "Markers"
+  };
+}
 
 //* INFO: Helper Functions
 export const addCommas = (num: string): string =>

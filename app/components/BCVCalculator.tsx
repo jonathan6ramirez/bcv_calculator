@@ -8,6 +8,9 @@ import { addCommas, removeNonNumeric, calculateBCV } from "../util"
 // Form
 import Form from "react-bootstrap/Form";
 
+// Components
+import Navbar from "./Navbar";
+
 export default function BCVCalculator() {
   const initialState: InitialState = { msrp: "0", lowestComp: "0", discount: "0" }
   const [form, setForm] = useState<InitialState>({ ...initialState })
@@ -47,7 +50,10 @@ export default function BCVCalculator() {
   }
 
   return (
-    <>
+    <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
+      dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-2">
+      {/* Navbar*/}
+      <Navbar />
       <div className="px-10 mb-10">
         <Form onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-3 md:gap-10 md:text-xl">
@@ -134,6 +140,6 @@ export default function BCVCalculator() {
         </div>
       </div>
 
-    </>
+    </div>
   )
 }
