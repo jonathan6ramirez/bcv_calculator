@@ -12,6 +12,7 @@
     "deploy": "cross-env NODE_ENV=production && npm run build && npx gh-pages -d out"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.6",
     "bootstrap": "^5.3.7",
     "next": "15.4.1",
     "react": "19.1.0",

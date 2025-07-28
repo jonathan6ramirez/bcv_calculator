@@ -1,9 +1,8 @@
 import { useState } from "react"
 // Types
-import { InitialState } from "../types"
-
+import { InitialState } from "@/app/types";
 // Util Functions
-import { addCommas, removeNonNumeric, calculateBCV } from "../util"
+import { addCommas, removeNonNumeric, calculateBCV } from "../../util"
 
 // Form
 import Form from "react-bootstrap/Form";
