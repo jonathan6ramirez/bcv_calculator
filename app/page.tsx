@@ -10,7 +10,10 @@ export default function Home() {
     <main className=" dark:bg-slate-900 dark:text-slate-300 p-5 h-full gap-2 flex flex-col">
       {/* Form Container */}
       <BCVCalculator />
-      <div className="border rounded bg-slate-900 text-white m-5 p-4">
+      <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
+        dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-2
+        hover:cursor-pointer"
+      >
         <Link href="/dealermargins">Dealer Margins</Link>
       </div>
       {/* Markers Component */}

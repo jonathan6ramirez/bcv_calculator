@@ -80,8 +80,12 @@ function AddCompModal({ isOpen, onClose, onSubmit, title, children }: ModalProps
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="w-full max-w-md transform rounded-2xl bg-slate-800 border border-slate-600
-                    p-6 shadow-xl transition-all gap-2 flex flex-col">
+                <DialogPanel
+                  className="w-full max-w-md transform rounded-2xl
+                    bg-slate-100 dark:bg-slate-800 border dark:border-slate-600 dark:text-slate-300
+                    p-6 shadow-xl transition-all gap-2 flex flex-col "
+
+                >
                   <DialogTitle className="text-2xl font-medium text-slate-300">
                     {title}
                   </DialogTitle>

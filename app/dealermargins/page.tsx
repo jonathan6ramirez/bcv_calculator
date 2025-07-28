@@ -26,10 +26,13 @@ export default function DealerMargins() {
   return (
     <>
       <div className="dark:bg-slate-900 dark:text-slate-300 p-5 h-full gap-2 flex flex-col">
+
         <div className="md:p-4 m-4 flex flex-col gap-2 justify-start">
           <div
-            className="bg-slate-800 border-slate-600 border rounded p-2 w-fit hover:cursor-pointer
+            className="shadow-md bg-slate-100 dark:bg-slate-800 border-slate-600 dark:text-slate-300
+            border rounded p-2 w-fit hover:cursor-pointer
             active:scale-95 transition-transform duration-100"
+
             onClick={() => router.back()}
           >
             <button
