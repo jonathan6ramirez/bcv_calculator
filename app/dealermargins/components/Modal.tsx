@@ -84,13 +84,12 @@ function AddCompModal({ isOpen, onClose, onSubmit, title, children }: ModalProps
                   className="w-full max-w-md transform rounded-2xl
                     bg-slate-100 dark:bg-slate-800 border dark:border-slate-600 dark:text-slate-300
                     p-6 shadow-xl transition-all gap-2 flex flex-col "
-
                 >
-                  <DialogTitle className="text-2xl font-medium text-slate-300">
+                  <DialogTitle className="text-2xl font-medium dark:text-slate-300">
                     {title}
                   </DialogTitle>
                   <Field className="mt-2 flex flex-col gap-2">
-                    <Label className="opacity-75">{children}</Label>
+                    <Label className="dark:opacity-75">{children}</Label>
                     <Input
                       autoFocus={true}
                       type="text"
