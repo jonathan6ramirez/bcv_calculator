@@ -22,6 +22,7 @@ export default function DisplayComps({ comps }: CompsProps) {
           <div
             className="flex flex-row gap-2 justify-center items-center"
             id={comp.id}
+            key={comp.id}
           >
             <DisplayComp
               price={String(comp.price)}

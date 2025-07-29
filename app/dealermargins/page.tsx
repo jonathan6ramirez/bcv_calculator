@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 // Components
 import AddCompModal from "./components/Modal";
+import DeleteCompModal from "./components/DeleteModal";
 import DisplayComps from "./components/DisplayComps";
 
 interface Comp {
@@ -17,10 +18,19 @@ export default function DealerMargins() {
 
   const [comps, setComps] = useState<Comp[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   // Helper Function
   const handleSubmit = (price: number) => {
     setComps(prev => [...prev, { price, id: crypto.randomUUID() }]);
+  }
+
+  const handleDeleteComp = () => {
+    // TODO: Add ability to delete comp
+  }
+
+  const handleRemoveComp = (id: string) => {
+    setComps(prev => prev.filter(comp => comp.id !== id));
   }
 
   return (
@@ -32,7 +42,6 @@ export default function DealerMargins() {
             className="shadow-md bg-slate-100 dark:bg-slate-800 border-slate-600 dark:text-slate-300
             border rounded p-2 w-fit hover:cursor-pointer
             active:scale-95 transition-transform duration-100"
-
             onClick={() => router.back()}
           >
             <button
@@ -84,7 +93,18 @@ export default function DealerMargins() {
           </button>
         </div>
 
-        <div className="p-4">
+        <div>
+          <DeleteCompModal
+            isOpen={deleteModal}
+            onClose={() => setDeleteModal(false)}
+            onSubmit={handleSubmit}
+            title="Are you sure that you want to delete this modal?"
+          >
+            <p className="text-slate-300"></p>
+          </DeleteCompModal>
+        </div>
+
+        <div className="">
           <AddCompModal
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
