@@ -49,18 +49,18 @@ export default function BCVCalculator() {
   }
 
   return (
-    <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
-      dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-2">
+    <div className="shadow-md md:p-5 p-2 py-4 bg-slate-100 rounded-md m-5 border
+      dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-4">
       {/* Navbar*/}
       <Navbar />
-      <div className="px-10 mb-10">
+      <div className="px-4 md:px-10 mb-4">
         <Form onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-3 md:gap-10 md:text-xl">
             <Form.Group
               controlId="msrp"
               className="grid grid-cols-2"
             >
-              <Form.Label className="text-lg">MSRP:</Form.Label>
+              <Form.Label className="md:text-lg">MSRP:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter MSRP."
@@ -76,7 +76,7 @@ export default function BCVCalculator() {
               controlId="lowest_comp"
               className="grid grid-cols-2"
             >
-              <Form.Label className="text-lg">
+              <Form.Label className="md:text-lg">
                 Lowest Comp:
               </Form.Label>
               <Form.Control
@@ -94,7 +94,7 @@ export default function BCVCalculator() {
               controlId="discount"
               className="grid grid-cols-2"
             >
-              <Form.Label className="text-lg">
+              <Form.Label className="md:text-lg">
                 Discount:
               </Form.Label>
               <Form.Control
@@ -109,7 +109,7 @@ export default function BCVCalculator() {
             </Form.Group>
           </div>
 
-          <div className="flex justify-around mt-10 md:text-lg lg:text-xl text-white">
+          <div className="flex justify-around mt-8 md:text-lg lg:text-xl text-white">
             <button
               type="reset"
               className="bg-gray-700 shadow-lg hover:scale-110 transition ease-in-out rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto"
@@ -128,7 +128,7 @@ export default function BCVCalculator() {
       </div>
 
       {/* BCV & Highest Target Price Results */}
-      <div className="grid gap-4 px-10 text-2xl">
+      <div className="grid gap-4 px-10 md:text-2xl">
         <div className="flex justify-between">
           <Form.Label className="mx-3 text">BCV:</Form.Label>
           <span>${BCV}</span>

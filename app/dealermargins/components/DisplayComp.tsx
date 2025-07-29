@@ -9,7 +9,8 @@ interface DisplayCompProps {
 export default function DisplayComp({ price, index }: DisplayCompProps) {
 
   return (
-    <div className="p-2 flex flex-row justify-between items-center border border-slate-600 bg-slate-800 text-slate-300 rounded w-full">
+    <div className="p-2 flex flex-row justify-between items-center border border-slate-600
+        bg-slate-800 text-slate-300 rounded w-full text-sm md:text-lg">
       <span>Comp {index + 1}:</span>
       <div className="flex flex-row items-center gap-2">
         <span>${addCommas(removeNonNumeric(price))}</span>

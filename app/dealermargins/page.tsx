@@ -40,12 +40,12 @@ export default function DealerMargins() {
         <div className="md:p-4 m-4 flex flex-col gap-2 justify-start">
           <div
             className="shadow-md bg-slate-100 dark:bg-slate-800 border-slate-600 dark:text-slate-300
-            border rounded p-2 w-fit hover:cursor-pointer
+            border rounded p-1 md:p-2 w-fit hover:cursor-pointer
             active:scale-95 transition-transform duration-100"
             onClick={() => router.back()}
           >
             <button
-              className="underline text-sm md:text-lg flex flex-row items-center m-auto"
+              className="underline text-xs md:text-lg flex flex-row items-center"
             >
               <div>
                 <svg
@@ -64,8 +64,8 @@ export default function DealerMargins() {
               <h3 className="">Go Back</h3>
             </button>
           </div>
-          <h2 className="text-2xl">
-            Add the Bottom 3 Comps:
+          <h2 className="text-lg md:text-2xl text-center">
+            Dealer Margins
           </h2>
         </div>
 
@@ -75,21 +75,20 @@ export default function DealerMargins() {
 
           <button className="border border-dashed border-emerald-500 hover:border-emerald-300 hover:cursor-pointer
             text-emerald-500 hover:text-emerald-300 active:scale-95 transition-transform duration-100
-            rounded p-2 flex flex-row justify-center items-center w-1/2 m-auto gap-2"
+            rounded p-1 md:p-2 flex flex-row justify-center items-center w-1/2 m-auto gap-2"
             onClick={() => setIsOpen(true)}
           >
-            <div className="flex justify-center items-center p-1
+            <div className="flex justify-center items-center md:p-1
             hover:border-emerald-300 border-emerald-500 border border-dashed rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                className="w-3.5 h-3.5 md:w-4 md:h-4"
                 fill="mediumaquamarine"
                 viewBox="0 0 16 16">
                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
               </svg>
             </div>
-            <h3 className="md:text-xl">Add Comp</h3>
+            <h3 className="text-sm md:text-xl">Add Comp</h3>
           </button>
         </div>
 

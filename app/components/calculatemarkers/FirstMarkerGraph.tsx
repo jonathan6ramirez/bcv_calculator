@@ -11,10 +11,10 @@ export default function FirstMarkerGraph({ data }: FirstMarkerGraphProps) {
   return (
     <>
       {/* Bar Chart */}
-      <div className="text-white rounded-md h-125 md:w-1/2 md:h-150 bg-slate-600
-        p-4 pb-8 md:flex md:justify-center md:flex-col">
+      <div className="text-white rounded-md h-100 md:w-1/2 md:h-150 bg-slate-600 w-full 
+          p-4 pb-8 flex justify-center flex-col">
         <div className="w-full text-center">
-          <span className="text-white text-2xl">Markers</span>
+          <span className="text-white md:text-2xl">Markers</span>
         </div>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -22,10 +22,10 @@ export default function FirstMarkerGraph({ data }: FirstMarkerGraphProps) {
             height={300}
             data={data}
             margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
+              top: 10,
+              right: 15,
+              left: 0,
+              bottom: 0,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="white" />

@@ -82,10 +82,10 @@ export default function CalculateMarkers() {
   }
 
   return (
-    <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
+    <div className="shadow-md p-4 bg-slate-100 rounded-md m-5 border
       dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-4">
-      <div className="w-full text-center p-5 mb-4">
-        <h1 className="text-2xl md:text-3xl">
+      <div className="w-full text-center my-2">
+        <h1 className="text-xl md:text-3xl">
           Calculate BCV, 50%, 75%
         </h1>
       </div>
@@ -97,7 +97,7 @@ export default function CalculateMarkers() {
               controlId="msrp"
               className="grid grid-cols-2"
             >
-              <Form.Label className="text-lg">MSRP:</Form.Label>
+              <Form.Label className="md:text-lg">MSRP:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="MSRP"
@@ -113,7 +113,7 @@ export default function CalculateMarkers() {
               controlId="lowest_comp"
               className="grid grid-cols-2"
             >
-              <Form.Label className="text-lg">
+              <Form.Label className="md:text-lg">
                 Cents/Dollar:
               </Form.Label>
               <Form.Select
@@ -145,17 +145,19 @@ export default function CalculateMarkers() {
             </Form.Group>
           </div>
 
-          <div className="flex justify-around mt-10 md:text-lg lg:text-xl text-white">
+          <div className="flex justify-around mt-6 md:text-lg lg:text-xl text-white">
             <button
               type="reset"
-              className="bg-gray-700 shadow-lg hover:scale-110 transition ease-in-out rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto"
+              className="bg-gray-700 shadow-lg hover:scale-110 transition ease-in-out
+                text-sm md:text-lg rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto"
               onClick={() => handleReset()}
             >
               Reset
             </button>
             <button
               type="submit"
-              className="bg-green-600 shadow-lg hover:scale-110 transition ease-in-out rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto"
+              className="bg-green-600 shadow-lg hover:scale-110 transition ease-in-out
+                text-sm md:text-lg rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto"
             >
               Calculate
             </button>
@@ -164,9 +166,9 @@ export default function CalculateMarkers() {
       </div>
 
       {/* BCV, 50%, 75% */}
-      <div className="grid gap-4 px-10 text-2xl">
+      <div className="grid gap-4 px-10 md:text-2xl">
         <div className="flex justify-between">
-          <Form.Label className="mx-3 text">BCV:</Form.Label>
+          <Form.Label className="mx-3">BCV:</Form.Label>
           <span>${markers.bcv}</span>
         </div>
         <div className="flex justify-between">

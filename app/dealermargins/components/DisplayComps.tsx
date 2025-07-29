@@ -15,8 +15,8 @@ export default function DisplayComps({ comps }: CompsProps) {
   console.log(comps, 'these are the comps inside the DisplayComps')
 
   return (
-    <div className="mb-4 flex flex-col gap-2">
-      <h2>These are the comps.</h2>
+    <div className="mb-6 flex flex-col gap-2">
+      <h2>Add at least 1 comp to calculate.</h2>
       {comps && comps.length > 0 && (
         comps.map((comp, index) =>
           <div

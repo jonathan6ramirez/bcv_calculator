@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className=" dark:bg-slate-900 dark:text-slate-300 p-5 h-full gap-2 flex flex-col">
+    <main className=" dark:bg-slate-900 dark:text-slate-300 p-5 pb-5 mb-5 
+        h-full gap-2 flex flex-col">
       {/* Form Container */}
       <BCVCalculator />
       <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border
