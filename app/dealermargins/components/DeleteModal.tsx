@@ -1,58 +1,24 @@
 "use client"
 
 // Frameworks
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   Dialog,
   DialogPanel,
   DialogTitle,
-  Input,
-  Label,
   Transition,
   TransitionChild,
-  Field
 } from '@headlessui/react';
-
-// Util Functions
-import { addCommas, removeNonNumeric } from '@/app/util';
 
 
 interface ModalProps {
   isOpen: boolean,
   onClose: () => void,
-  onSubmit: (price: number) => void,
+  onSubmit: () => void,
   title: string,
-  children: React.ReactNode,
 }
 
-interface FormType {
-  price: string,
-}
-
-function DeleteCompModal({ isOpen, onClose, onSubmit, title, children }: ModalProps) {
-  const [form, setForm] = useState<FormType>({ price: "" });
-
-  // Handler functions
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-
-    setForm({
-      ...form,
-      [name]: addCommas(removeNonNumeric(value)),
-    })
-  }
-
-  const handleSubmit = () => {
-    // TODO: Need to pass in the id and pass it to the parent.
-    const cleaned = Number(removeNonNumeric(form.price));
-
-    if (!isNaN(cleaned)) {
-      onSubmit(cleaned); // pass number back to the parent.
-      setForm({ price: "" });
-      onClose();
-    }
-  }
-
+function DeleteCompModal({ isOpen, onClose, onSubmit, title }: ModalProps) {
   return (
     <>
 
@@ -89,33 +55,26 @@ function DeleteCompModal({ isOpen, onClose, onSubmit, title, children }: ModalPr
                   <DialogTitle className="text-2xl font-medium dark:text-slate-300">
                     {title}
                   </DialogTitle>
-                  <Field className="mt-2 flex flex-col gap-2">
-                    <Label className="dark:opacity-75">{children}</Label>
-                    <Input
-                      autoFocus={true}
-                      type="text"
-                      placeholder="Enter price"
-                      name="price"
-                      onChange={handleChange}
-                      value={form.price}
-                      inputMode="numeric"
-                      className="border border-gray-600 dark:bg-slate-800 shadow rounded px-1"
-                    />
-                  </Field>
                   <div className="mt-4 text-right flex flex-row justify-center gap-2">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-white hover:bg-blue-700 transition"
+                      className="inline-flex justify-center rounded-md border
+                        border-slate-600 bg-slate-700 px-4 py-2 text-sm text-white
+                        hover:scale-105 hover:cursor-pointer
+                        active:scale-90 transition-transform duration-100"
                       onClick={onClose}
                     >
-                      Close
+                      Cancel
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-blue-400 bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 transition"
-                      onClick={handleSubmit}
+                      className="inline-flex justify-center rounded-md border border-red-400 bg-red-600
+                        px-4 py-2 text-sm text-white
+                        hover:cursor-pointer hover:scale-105
+                        active:scale-90 transition-transform duration-100"
+                      onClick={onSubmit}
                     >
-                      Submit
+                      Yes
                     </button>
                   </div>
                 </DialogPanel>

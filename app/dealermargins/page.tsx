@@ -13,25 +13,34 @@ interface Comp {
   id: string,
 };
 
+interface ToBeDeleted {
+  id: string
+}
+
 export default function DealerMargins() {
   const router = useRouter();
 
   const [comps, setComps] = useState<Comp[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [toBeDeleted, setToBeDeleted] = useState<ToBeDeleted>({ id: "" });
 
   // Helper Function
   const handleSubmit = (price: number) => {
     setComps(prev => [...prev, { price, id: crypto.randomUUID() }]);
   }
 
-  const handleDeleteComp = () => {
+  const handleShowDeleteComp = (id: string) => {
     // TODO: Add ability to delete comp
+    setToBeDeleted({ id });
+    setDeleteModal(!deleteModal);
   }
 
   const handleRemoveComp = (id: string) => {
     setComps(prev => prev.filter(comp => comp.id !== id));
   }
+
+  //console.log(toBeDeleted, 'this is the state of to be deleted');
 
   return (
     <>
@@ -71,7 +80,11 @@ export default function DealerMargins() {
 
         <div className="m-4 p-4 border border-slate-800 rounded" id="comps">
           {/*Display the comps*/}
-          <DisplayComps comps={comps} />
+          <DisplayComps
+            comps={comps}
+            setDeleteModal={setDeleteModal}
+            setToBeDeleted={setToBeDeleted}
+          />
 
           <button className="border border-dashed border-emerald-500 hover:border-emerald-300 hover:cursor-pointer
             text-emerald-500 hover:text-emerald-300 active:scale-95 transition-transform duration-100
@@ -96,11 +109,9 @@ export default function DealerMargins() {
           <DeleteCompModal
             isOpen={deleteModal}
             onClose={() => setDeleteModal(false)}
-            onSubmit={handleSubmit}
-            title="Are you sure that you want to delete this modal?"
-          >
-            <p className="text-slate-300"></p>
-          </DeleteCompModal>
+            onSubmit={() => handleRemoveComp(toBeDeleted.id)}
+            title="Are you sure that you want to delete this comp?"
+          />
         </div>
 
         <div className="">

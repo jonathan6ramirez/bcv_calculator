@@ -7,12 +7,24 @@ type Comp = {
   id: string,
 }
 
-interface CompsProps {
-  comps: Comp[]
+interface ToBeDeleted {
+  id: string
 }
 
-export default function DisplayComps({ comps }: CompsProps) {
+interface CompsProps {
+  comps: Comp[]
+  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setToBeDeleted: React.Dispatch<React.SetStateAction<ToBeDeleted>>,
+}
+
+export default function DisplayComps({ comps, setDeleteModal, setToBeDeleted }: CompsProps) {
   console.log(comps, 'these are the comps inside the DisplayComps')
+  // INFO: This is where I need to abstract away the setting of the id and the boolean state.
+  //
+  const handleClick = (id: string) => {
+    setToBeDeleted({ id });
+    setDeleteModal((prev) => !prev);
+  }
 
   return (
     <div className="mb-6 flex flex-col gap-2">
@@ -27,7 +39,7 @@ export default function DisplayComps({ comps }: CompsProps) {
             <DisplayComp
               price={String(comp.price)}
               index={index}
-            //id={comp.price}
+              onClick={() => handleClick(comp.id)}
             />
           </div>
         )

@@ -1,21 +1,27 @@
 
 import { addCommas, removeNonNumeric } from "@/app/util"
+import React from "react"
 
 interface DisplayCompProps {
   price: string
   index: number
+  onClick: () => void,
 }
 
-export default function DisplayComp({ price, index }: DisplayCompProps) {
-
+export default function DisplayComp({ price, index, onClick }: DisplayCompProps) {
   return (
-    <div className="p-2 flex flex-row justify-between items-center border border-slate-600
-        bg-slate-800 text-slate-300 rounded w-full text-sm md:text-lg">
+    <div className="p-2 flex flex-row justify-between items-center
+        border border-slate-400 bg-slate-600
+        dark:border-slate-600 dark:bg-slate-800
+        text-slate-300 rounded w-full text-sm md:text-lg">
       <span>Comp {index + 1}:</span>
       <div className="flex flex-row items-center gap-2">
         <span>${addCommas(removeNonNumeric(price))}</span>
-        <button className="border border-slate-600 bg-slate-800 rounded p-1 hover:cursor-pointer hover:bg-slate-600
+        <button className="border border-slate-500 bg-slate-700
+            dark:border-slate-600 dark:bg-slate-800
+            rounded p-1 hover:cursor-pointer hover:bg-slate-600 hover:scale-110
             active:scale-90 transition-transform duration-100"
+          onClick={onClick}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
