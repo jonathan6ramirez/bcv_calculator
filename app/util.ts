@@ -1,4 +1,4 @@
-import { BCVCalculated, MarkersType } from "./types";
+import { BCVCalculated, MarkersType, Comp, CalculatedDealerMargins } from "./types";
 
 export function calculateBCV(price: number, lowestComp: number, discount: number): BCVCalculated {
   if (lowestComp < 2000) {
@@ -49,6 +49,19 @@ export function calculateMarkers(cents: number, msrp: number) {
     seventyFive: seventyFive,
     msrp: remaining,
     name: "Markers"
+  };
+}
+
+export function calculateDealerMargins(comps: Comp[]): CalculatedDealerMargins {
+  const sum: number = comps.reduce((acc, comp) => acc + comp.price, 0);
+  const avg: number = sum / comps.length;
+  const avgSalePrice: number = avg * 0.8;
+  const avgTradIn: number = avgSalePrice * 0.9;
+
+  return {
+    avg: avg,
+    avgSalePrice: avgSalePrice,
+    avgTradeIn: avgTradIn,
   };
 }
 

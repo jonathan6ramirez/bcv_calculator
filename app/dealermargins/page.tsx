@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import AddCompModal from "./components/Modal";
 import DeleteCompModal from "./components/DeleteModal";
 import DisplayComps from "./components/DisplayComps";
+import { CalculatedDealerMargins } from "../types";
+import { calculateDealerMargins } from "../util";
 
 interface Comp {
   price: number,
@@ -24,23 +26,30 @@ export default function DealerMargins() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [toBeDeleted, setToBeDeleted] = useState<ToBeDeleted>({ id: "" });
+  const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(true);
+
+  const initialDealerMargins: CalculatedDealerMargins = { avg: 0, avgSalePrice: 0, avgTradeIn: 0 };
+  const [calculatedDealerMargins, setCalculatedDealerMargins] = useState<CalculatedDealerMargins>(initialDealerMargins);
 
   // Helper Function
-  const handleSubmit = (price: number) => {
+  const handleSubmit = (price: number): void => {
     setComps(prev => [...prev, { price, id: crypto.randomUUID() }]);
+    setButtonsDisabled(false);
   }
 
-  const handleShowDeleteComp = (id: string) => {
-    // TODO: Add ability to delete comp
-    setToBeDeleted({ id });
+  const handleRemoveComp = (id: string): void => {
+    setComps(prev => prev.filter(comp => comp.id !== id));
+    console.log(comps.length, 'this is the comps length whenever you delete a comp');
+    if (comps.length == 1) setButtonsDisabled(true);
     setDeleteModal(!deleteModal);
   }
 
-  const handleRemoveComp = (id: string) => {
-    setComps(prev => prev.filter(comp => comp.id !== id));
-  }
+  const handleCalculateMarkers = (): void => {
+    const results: CalculatedDealerMargins = calculateDealerMargins(comps);
 
-  //console.log(toBeDeleted, 'this is the state of to be deleted');
+    setCalculatedDealerMargins(results);
+    console.log("these are the results", results);
+  }
 
   return (
     <>
@@ -102,6 +111,29 @@ export default function DealerMargins() {
               </svg>
             </div>
             <h3 className="text-sm md:text-xl">Add Comp</h3>
+          </button>
+        </div>
+
+        <div className="flex justify-around mt-8 md:text-lg lg:text-xl text-white">
+          <button
+            type="reset"
+            className="bg-gray-700 shadow-lg hover:scale-110 transition ease-in-out
+              rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto
+              disabled:opacity-75 disabled:bg-gray-500"
+            disabled={buttonsDisabled}
+          //onClick={() => handleReset()}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            className="bg-green-600 shadow-lg hover:scale-110 transition ease-in-out
+              rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto
+              disabled:opacity-75 disabled:bg-gray-500"
+            disabled={buttonsDisabled}
+            onClick={handleCalculateMarkers}
+          >
+            Calculate
           </button>
         </div>
 

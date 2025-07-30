@@ -28,3 +28,13 @@ export interface MarkersDataType {
   name: string,
 }
 
+export interface Comp {
+  price: number,
+  id: string,
+};
+
+export interface CalculatedDealerMargins {
+  avg: number,
+  avgSalePrice: number,
+  avgTradeIn: number,
+}
