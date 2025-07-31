@@ -9,6 +9,7 @@ import DeleteCompModal from "./components/DeleteModal";
 import DisplayComps from "./components/DisplayComps";
 import { CalculatedDealerMargins } from "../types";
 import { calculateDealerMargins } from "../util";
+import { Form } from "react-bootstrap";
 
 interface Comp {
   price: number,
@@ -37,6 +38,12 @@ export default function DealerMargins() {
     setButtonsDisabled(false);
   }
 
+  const handleReset = (): void => {
+    setButtonsDisabled(true)
+    setComps([]);
+    setCalculatedDealerMargins(initialDealerMargins);
+  }
+
   const handleRemoveComp = (id: string): void => {
     setComps(prev => prev.filter(comp => comp.id !== id));
     console.log(comps.length, 'this is the comps length whenever you delete a comp');
@@ -52,8 +59,11 @@ export default function DealerMargins() {
   }
 
   return (
-    <>
-      <div className="dark:bg-slate-900 dark:text-slate-300 p-5 h-full gap-2 flex flex-col">
+    <div className=" dark:bg-slate-900 dark:text-slate-300 md:p-5 pb-5 mb-5 
+        h-full gap-2 flex flex-col">
+      {/* <div className="dark:bg-slate-900 dark:text-slate-300 p-5 h-full gap-2 flex flex-col"> */}
+      <div className="shadow-md md:p-5 p-2 py-4 bg-slate-100 rounded-md m-5 border
+        dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 flex flex-col gap-4">
 
         <div className="md:p-4 m-4 flex flex-col gap-2 justify-start">
           <div
@@ -97,7 +107,7 @@ export default function DealerMargins() {
 
           <button className="border border-dashed border-emerald-500 hover:border-emerald-300 hover:cursor-pointer
             text-emerald-500 hover:text-emerald-300 active:scale-95 transition-transform duration-100
-            rounded p-1 md:p-2 flex flex-row justify-center items-center w-1/2 m-auto gap-2"
+            rounded p-1 md:p-2 flex flex-row justify-center items-center w-full m-auto gap-2"
             onClick={() => setIsOpen(true)}
           >
             <div className="flex justify-center items-center md:p-1
@@ -119,9 +129,9 @@ export default function DealerMargins() {
             type="reset"
             className="bg-gray-700 shadow-lg hover:scale-110 transition ease-in-out
               rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto
-              disabled:opacity-75 disabled:bg-gray-500"
+              disabled:opacity-75 disabled:bg-gray-500 active:scale-90"
             disabled={buttonsDisabled}
-          //onClick={() => handleReset()}
+            onClick={() => handleReset()}
           >
             Reset
           </button>
@@ -129,12 +139,28 @@ export default function DealerMargins() {
             type="submit"
             className="bg-green-600 shadow-lg hover:scale-110 transition ease-in-out
               rounded-2xl w-2/5 md:w-1/4 lg:w-1/5 xl:w-1/12 m-auto
-              disabled:opacity-75 disabled:bg-gray-500"
+              disabled:opacity-75 disabled:bg-gray-500 active:scale-90"
             disabled={buttonsDisabled}
             onClick={handleCalculateMarkers}
           >
             Calculate
           </button>
+        </div>
+
+        {/* BCV & Highest Target Price Results */}
+        <div className="grid gap-2 p-4 md:text-2xl">
+          <div className="flex justify-between">
+            <Form.Label className="mx-3 text">Average Price:</Form.Label>
+            <span>${calculatedDealerMargins.avg}</span>
+          </div>
+          <div className="flex justify-between">
+            <Form.Label className="mx-3 text">Average Sale Price:</Form.Label>
+            <span>${calculatedDealerMargins.avgSalePrice}</span>
+          </div>
+          <div className="flex justify-between">
+            <Form.Label className="mx-3 text">Average Trade In:</Form.Label>
+            <span>${calculatedDealerMargins.avgTradeIn}</span>
+          </div>
         </div>
 
         <div>
@@ -157,6 +183,6 @@ export default function DealerMargins() {
           </AddCompModal>
         </div>
       </div>
-    </>
+    </div>
   );
 };
