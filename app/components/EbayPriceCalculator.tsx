@@ -16,7 +16,7 @@ export default function EbayPriceCalculator() {
   }
 
   return (
-    <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 border dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">
+    <div className="shadow-md p-5 bg-slate-100 rounded-md m-5 mb-10 border dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">
       <h2 className="text-2xl md:text-3xl text-center">
         Ebay Price Calculator
       </h2>

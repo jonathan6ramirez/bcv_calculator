@@ -38,3 +38,24 @@ export interface CalculatedDealerMargins {
   avgSalePrice: number,
   avgTradeIn: number,
 }
+
+export interface CalculatedSpreads {
+  bcv: number,
+
+  avg: number,
+  avgTradeIn: number,
+  lowRetail: number,
+
+  upside: CalculatedUpside,
+  downside: CalculatedDownside,
+}
+
+export interface CalculatedUpside {
+  amount: number,
+  percentage: string,
+}
+
+export interface CalculatedDownside {
+  amount: number,
+  percentage: string,
+}

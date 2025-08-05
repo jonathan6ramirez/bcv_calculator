@@ -1,4 +1,4 @@
-import { BCVCalculated, MarkersType, Comp, CalculatedDealerMargins } from "./types";
+import { BCVCalculated, Comp, CalculatedDealerMargins, CalculatedSpreads, CalculatedUpside, CalculatedDownside } from "./types";
 
 export function calculateBCV(price: number, lowestComp: number, discount: number): BCVCalculated {
   if (lowestComp < 2000) {
@@ -63,6 +63,63 @@ export function calculateDealerMargins(comps: Comp[]): CalculatedDealerMargins {
     avgSalePrice: avgSalePrice,
     avgTradeIn: avgTradIn,
   };
+}
+
+export function calculateSpreads(msrp: number, cents: number, targetBuy: string, comps: Comp[]): CalculatedSpreads {
+  const sum: number = comps.reduce((acc, comp) => acc + comp.price, 0);
+  const avg: number = sum / comps.length;
+  const avgSalePrice: number = avg * 0.8;
+  const avgTradIn: number = avgSalePrice * 0.9;
+
+  const bcv: number = msrp * cents;
+  targetBuy = removeNonNumeric(targetBuy);
+
+  // TODO: How do you calculate the upside or potential profit and how do you calculate the downside
+  // INFO: By getting the buy price and calulating the difference of the lowest retail then
+  // calculating how much percentage is is of the buy
+  // and for the downside you would get the difference and calulate the percentage of the buy
+  const calculateUpside = (): CalculatedUpside => {
+    // INFO: Dont want to show possible returns if the target buy is above the lowest retail
+    // to ensure that you buying at least some profit
+    if (avgSalePrice < parseInt(targetBuy)) return { amount: 0, percentage: "0" };
+
+    const difference: number = Math.abs(avgSalePrice - Number(targetBuy));
+    console.log(difference, 'this is the difference inside upside');
+
+    const percentage = (difference / Number(targetBuy)) * 100
+    const upside = percentage.toFixed(1);
+
+    return {
+      amount: difference,
+      percentage: upside,
+    }
+  }
+
+  const calculateDownside = (): CalculatedDownside => {
+    const difference: number = Math.abs(Number(targetBuy) - bcv);
+
+    const percentage = (difference / Number(targetBuy)) * 100
+    const downside = percentage.toFixed(1);
+
+    return {
+      amount: difference,
+      percentage: downside,
+    }
+  }
+
+  const upside: CalculatedUpside = calculateUpside();
+  const downside: CalculatedDownside = calculateDownside();
+
+
+  return {
+    avg: avg,
+    bcv: bcv,
+    lowRetail: avgSalePrice,
+    avgTradeIn: avgTradIn,
+
+    upside: upside,
+    downside: downside,
+  }
 }
 
 //* INFO: Helper Functions

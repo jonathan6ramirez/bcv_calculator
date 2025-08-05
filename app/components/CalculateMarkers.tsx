@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Form from "react-bootstrap/Form";
 
 // Types

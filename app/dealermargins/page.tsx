@@ -46,7 +46,6 @@ export default function DealerMargins() {
 
   const handleRemoveComp = (id: string): void => {
     setComps(prev => prev.filter(comp => comp.id !== id));
-    console.log(comps.length, 'this is the comps length whenever you delete a comp');
     if (comps.length == 1) setButtonsDisabled(true);
     setDeleteModal(!deleteModal);
   }
@@ -55,7 +54,6 @@ export default function DealerMargins() {
     const results: CalculatedDealerMargins = calculateDealerMargins(comps);
 
     setCalculatedDealerMargins(results);
-    console.log("these are the results", results);
   }
 
   return (
